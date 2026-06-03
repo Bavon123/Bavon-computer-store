@@ -1,47 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Bavon Computer Store</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bavon Movie Store</title>
+
 <style>
-body{
-font-family:Arial;
+*{
 margin:0;
-background:#f4f4f4;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#111;
+color:white;
 }
 
 header{
-background:#0d47a1;
-color:white;
+background:#000;
 padding:20px;
 text-align:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+header h1{
+color:#e50914;
 }
 
 nav{
-background:#222;
-padding:15px;
-text-align:center;
+margin-top:10px;
 }
 
 nav a{
 color:white;
 text-decoration:none;
 margin:15px;
+font-size:18px;
+}
+
+.cart{
+float:right;
+margin-right:20px;
 }
 
 .hero{
-background:url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80');
+height:500px;
+background:url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1400&q=80');
 background-size:cover;
 background-position:center;
-height:400px;
 display:flex;
 justify-content:center;
 align-items:center;
-color:white;
-font-size:40px;
-font-weight:bold;
+flex-direction:column;
+text-align:center;
+animation:zoom 8s infinite alternate;
 }
 
-.products{
+.hero h2{
+font-size:50px;
+text-shadow:2px 2px 10px black;
+}
+
+.hero p{
+font-size:20px;
+margin:15px;
+}
+
+.btn{
+background:#e50914;
+color:white;
+padding:15px 30px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+font-size:18px;
+}
+
+.movies{
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
@@ -50,91 +89,147 @@ padding:30px;
 }
 
 .card{
-background:white;
-width:300px;
-border-radius:10px;
-box-shadow:0 0 10px gray;
+background:#222;
+width:280px;
+border-radius:15px;
 overflow:hidden;
+box-shadow:0 0 15px rgba(255,255,255,.2);
+transition:.5s;
+animation:fadeUp 1s;
+}
+
+.card:hover{
+transform:translateY(-10px) scale(1.05);
 }
 
 .card img{
 width:100%;
-height:220px;
+height:350px;
 object-fit:cover;
 }
 
-.card h3,p{
+.card h3{
 padding:10px;
 }
 
-button{
-background:#0d47a1;
+.card p{
+padding:0 10px;
+}
+
+.card button{
+margin:10px;
+background:#e50914;
 color:white;
 border:none;
 padding:10px 20px;
-margin:10px;
+border-radius:20px;
 cursor:pointer;
 }
 
-footer{
-background:#222;
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
 color:white;
+padding:15px 20px;
+border-radius:50px;
+text-decoration:none;
+font-weight:bold;
+}
+
+footer{
+background:black;
 text-align:center;
 padding:20px;
+margin-top:30px;
+}
+
+@keyframes zoom{
+from{background-size:100%;}
+to{background-size:110%;}
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 </style>
 </head>
 <body>
 
 <header>
-<h1>Bavon Computer Store</h1>
-<p>Quality Computers & Laptops</p>
-</header>
+<h1>BAVON MOVIE STORE</h1>
 
 <nav>
 <a href="#">Home</a>
-<a href="#">Laptops</a>
-<a href="#">Computers</a>
-<a href="#">Accessories</a>
-<a href="#">About</a>
+<a href="#">Movies</a>
+<a href="#">Categories</a>
 <a href="#">Contact</a>
+
+<span class="cart">
+🛒 Cart (<span id="cart-count">0</span>)
+</span>
 </nav>
+</header>
 
-<div class="hero">
-Best Computers & Laptops
-</div>
+<section class="hero">
+<h2>Latest Movies Collection</h2>
+<p>Buy and Download High Quality Movies</p>
+<button class="btn">Shop Now</button>
+</section>
 
-<div class="products">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80">
-<h3>HP Laptop</h3>
-<p>Price: TSh 59000</p>
-<button>Buy Now</button>
-</div>
+<section class="movies">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=600&q=80">
-<h3>Dell Desktop</h3>
-<p>Price: Tsh 75000</p>
-<button>Buy Now</button>
+<img src="https://image.tmdb.org/t/p/w500/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg">
+<h3>Avengers Endgame</h3>
+<p>Price: TZS 5,000</p>
+<button onclick="addToCart()">Add To Cart</button>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1517336714739-489689fd1ca8?auto=format&fit=crop&w=600&q=80">
-<h3>MacBook Pro</h3>
-<p>Price: Tsh 870000</p>
-<button>Buy Now</button>
+<img src="https://image.tmdb.org/t/p/w500/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg">
+<h3>Avengers Infinity War</h3>
+<p>Price: TZS 4,000</p>
+<button onclick="addToCart()">Add To Cart</button>
 </div>
 
+<div class="card">
+<img src="https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg">
+<h3>The Batman</h3>
+<p>Price: TZS 5,000</p>
+<button onclick="addToCart()">Add To Cart</button>
 </div>
+
+</section>
 
 <footer>
 <h3>Contact Us</h3>
 <p>Phone: 0749730828</p>
 <p>Email: bavon@gmail.com</p>
-<p>© 2026 Bavon Computer Store</p>
+<p>© 2026 Bavon Movie Store</p>
 </footer>
+
+<a href="https://wa.me/255749730828" class="whatsapp">
+💬 WhatsApp
+</a>
+
+<script>
+let count = 0;
+
+function addToCart(){
+count++;
+document.getElementById("cart-count").innerHTML = count;
+alert("Movie Added To Cart");
+}
+</script>
 
 </body>
 </html>
